@@ -746,8 +746,8 @@ arrow_up
 .arrow-up {
   position: fixed;
   z-index: 9999999;
-  bottom: 2%;
-  right: 2%;
+  bottom: 3%;
+  right: 6%;
   width: 35px;
   height: 35px;
   background: #fda099;
