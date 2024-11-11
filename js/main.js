@@ -1,60 +1,6 @@
 /*
 header #nav
  */
-$(document).ready(function () {
-  // 햄버거 메뉴 클릭 시
-  $(".nav_btn_ham").click(function () {
-    $("#nav,.page_cover,html").addClass("open");
-    window.location.hash = "#open"; // 해시값을 #open으로 설정
-  });
-
-  // .nav_btn_x 클릭 시 메뉴 닫기
-  $(".nav_btn_x").click(function (e) {
-    e.preventDefault(); // 기본 동작 (history.back())을 막음
-    $("#nav,.page_cover,html").removeClass("open"); // 메뉴 닫기
-    window.location.hash = ""; // 해시값을 비워서 메뉴 닫기
-  });
-
-  // 해시값 변경 시
-  window.onhashchange = function () {
-    // 현재 해시값이 #open이면, 메뉴를 열고
-    if (location.hash === "#open") {
-      $("#nav,.page_cover,html").addClass("open");
-    } else {
-      // 다른 해시값이면, 메뉴를 닫음
-      $("#nav,.page_cover,html").removeClass("open");
-    }
-
-    // 다른 해시값이 변경되면 스크롤 위치를 해당 ID로 이동
-    if (location.hash) {
-      var target = $(location.hash);
-      if (target.length) {
-        // 여백 없이 스크롤 이동
-        $('html, body').animate({
-          scrollTop: target.offset().top // 여백 없이 목표 위치로 이동
-        }, 500); // 500ms 동안 부드럽게 스크롤
-      }
-    }
-  };
-
-  // 서브 메뉴 처리
-  $("#nav ul.sub_mobile").hide();
-  $("#nav ul.nav_menu li").click(function () {
-    $("ul", this).slideToggle("fast");
-  });
-
-  // 메뉴 항목 클릭 시 해당 ID로 이동하도록 처리
-  $("#nav ul.nav_menu li a").click(function (e) {
-    var targetId = $(this).find("span").data("link"); // data-link 속성 값을 가져옴
-    if (targetId) {
-      // 기본 링크 동작을 막음 (페이지 리로드 방지)
-      e.preventDefault();
-      window.location.hash = targetId; // 해시를 해당 ID로 변경
-    }
-  });
-});
-
-// -------------------------------------
 
 // $(document).ready(function () {
 //   $(".nav_btn_ham").click(function () {
@@ -76,7 +22,39 @@ $(document).ready(function () {
 //   });
 // });
 
+// -------------------------------------
 
+$(document).ready(function () {
+  $(".nav_btn_ham").click(function () {
+    $("#nav,.page_cover,html").addClass("open");
+  });
+
+  $(".nav_btn_x").click(function (e) {
+    e.preventDefault();
+    $("#nav,.page_cover,html").removeClass("open");
+  });
+
+  $("#nav ul.nav_menu li a").click(function (e) {
+    var targetId = $(this).find("span").data("link");
+    if (targetId) {
+      e.preventDefault();
+      var target = $(targetId);
+      if (target.length) {
+        var offsetTop = target.offset().top;
+        if (targetId === "#about") {
+          offsetTop -= 60;
+        }
+        $("html, body").animate(
+          {
+            scrollTop: offsetTop,
+          },
+          500
+        );
+      }
+      $("#nav,.page_cover,html").removeClass("open");
+    }
+  });
+});
 
 /*
 main .sec1 .sec1_img
@@ -96,15 +74,65 @@ main .sec1 .sec1_img
 /*
 main .sec2 #slider
  */
+// jQuery(document).ready(function ($) {
+//   function initSlider() {
+//     var slideCount = $("#slider ul li").length;
+//     var slideWidth = $("#slider ul li").outerWidth();
+//     var sliderUlWidth = slideCount * slideWidth;
+//     $("#slider ul").css({ width: sliderUlWidth, marginLeft: -slideWidth });
+//     $("#slider ul li:last-child").prependTo("#slider ul");
+//   }
+//   initSlider();
+//   function moveLeft() {
+//     $("#slider ul").animate(
+//       {
+//         left: +$("#slider ul li").outerWidth(),
+//       },
+//       200,
+//       function () {
+//         $("#slider ul li:last-child").prependTo("#slider ul");
+//         $("#slider ul").css("left", "");
+//       }
+//     );
+//   }
+//   function moveRight() {
+//     $("#slider ul").animate(
+//       {
+//         left: -$("#slider ul li").outerWidth(),
+//       },
+//       200,
+//       function () {
+//         $("#slider ul li:first-child").appendTo("#slider ul");
+//         $("#slider ul").css("left", "");
+//       }
+//     );
+//   }
+//   $(".prev_btn").click(function (event) {
+//     event.preventDefault();
+//     moveLeft();
+//   });
+//   $(".next_btn").click(function (event) {
+//     event.preventDefault();
+//     moveRight();
+//   });
+//   $(window).resize(function () {
+//     initSlider();
+//   });
+// });
+
+// -------------------------------------
+
 jQuery(document).ready(function ($) {
   function initSlider() {
     var slideCount = $("#slider ul li").length;
     var slideWidth = $("#slider ul li").outerWidth();
     var sliderUlWidth = slideCount * slideWidth;
-    $("#slider ul").css({ width: sliderUlWidth, marginLeft: -slideWidth });
+    $("#slider ul").css({ width: sliderUlWidth, left: -slideWidth }); // left를 사용하여 초기 위치 조정
     $("#slider ul li:last-child").prependTo("#slider ul");
   }
+
   initSlider();
+
   function moveLeft() {
     $("#slider ul").animate(
       {
@@ -113,10 +141,11 @@ jQuery(document).ready(function ($) {
       200,
       function () {
         $("#slider ul li:last-child").prependTo("#slider ul");
-        $("#slider ul").css("left", "");
+        $("#slider ul").css("left", -$("#slider ul li").outerWidth()); // 위치 재조정
       }
     );
   }
+
   function moveRight() {
     $("#slider ul").animate(
       {
@@ -125,22 +154,28 @@ jQuery(document).ready(function ($) {
       200,
       function () {
         $("#slider ul li:first-child").appendTo("#slider ul");
-        $("#slider ul").css("left", "");
+        $("#slider ul").css("left", -$("#slider ul li").outerWidth()); // 위치 재조정
       }
     );
   }
+
   $(".prev_btn").click(function (event) {
     event.preventDefault();
     moveLeft();
   });
+
   $(".next_btn").click(function (event) {
     event.preventDefault();
     moveRight();
   });
+
   $(window).resize(function () {
+    var currentLeft = $("#slider ul").css("left");
     initSlider();
+    $("#slider ul").css("left", currentLeft); // resize 이벤트에서 현재 left 값을 유지
   });
 });
+
 
 /*
 main .sec3 .mockup
@@ -154,10 +189,10 @@ const aniUp = (mask, screen) => {
   let newH1 = mask.clientHeight;
   let newH2 = screen.clientHeight;
   let height = newH1 - newH2;
-  gsap.to(screen, { y: height, duration: 0.5 });
+  gsap.to(screen, { y: height, duration: 0.7 });
 };
 const aniDown = (screen) => {
-  gsap.to(screen, { y: 0, duration: 0.5 });
+  gsap.to(screen, { y: 0, duration: 0.7 });
 };
 ScrollTrigger.create({
   trigger: ".contents_left",
@@ -180,16 +215,16 @@ const aniUp2 = (mask, screen) => {
   let newH1 = mask.clientHeight;
   let newH2 = screen.clientHeight;
   let height = newH1 - newH2;
-  gsap.to(screen, { y: height, duration: 0.5 });
+  gsap.to(screen, { y: height, duration: 10.0 });
 };
 const aniDown2 = (screen) => {
-  gsap.to(screen, { y: 0, duration: 0.5 });
+  gsap.to(screen, { y: 0, duration: 10.0 });
 };
 ScrollTrigger.create({
   trigger: ".contents_left2",
   start: "top bottom",
   end: "bottom top",
-  scrub: 0.5,
+  scrub: 20,
   onEnter: () => {
     pcM2.addEventListener("mouseenter", () => aniUp(pcM2, pcS2));
     pcM2.addEventListener("mouseleave", () => aniDown(pcS2));
