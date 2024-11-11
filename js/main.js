@@ -127,7 +127,7 @@ jQuery(document).ready(function ($) {
     var slideCount = $("#slider ul li").length;
     var slideWidth = $("#slider ul li").outerWidth();
     var sliderUlWidth = slideCount * slideWidth;
-    $("#slider ul").css({ width: sliderUlWidth, left: -slideWidth }); // left를 사용하여 초기 위치 조정
+    $("#slider ul").css({ width: sliderUlWidth, left: -slideWidth }); // Set initial position with left
     $("#slider ul li:last-child").prependTo("#slider ul");
   }
 
@@ -141,7 +141,7 @@ jQuery(document).ready(function ($) {
       200,
       function () {
         $("#slider ul li:last-child").prependTo("#slider ul");
-        $("#slider ul").css("left", -$("#slider ul li").outerWidth()); // 위치 재조정
+        $("#slider ul").css("left", -$("#slider ul li").outerWidth()); // Reset position after animation
       }
     );
   }
@@ -154,11 +154,12 @@ jQuery(document).ready(function ($) {
       200,
       function () {
         $("#slider ul li:first-child").appendTo("#slider ul");
-        $("#slider ul").css("left", -$("#slider ul li").outerWidth()); // 위치 재조정
+        $("#slider ul").css("left", -$("#slider ul li").outerWidth()); // Reset position after animation
       }
     );
   }
 
+  // Attach event listeners only to button clicks
   $(".prev_btn").click(function (event) {
     event.preventDefault();
     moveLeft();
@@ -169,12 +170,9 @@ jQuery(document).ready(function ($) {
     moveRight();
   });
 
-  $(window).resize(function () {
-    var currentLeft = $("#slider ul").css("left");
-    initSlider();
-    $("#slider ul").css("left", currentLeft); // resize 이벤트에서 현재 left 값을 유지
-  });
+  // Removed the resize event listener to prevent unintended slider movement
 });
+
 
 
 /*
