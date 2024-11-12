@@ -64,8 +64,8 @@ main .sec1 .sec1_img
   function parallax(e) {
     this.querySelectorAll(".sec1_img .p_deco").forEach((el) => {
       const pos = el.getAttribute("data-speed");
-      const x = (window.innerWidth - e.pageX * pos) / 90;
-      const y = (window.innerHeight - e.pageY * pos) / 90;
+      const x = (window.innerWidth - e.pageX * pos) / 110;
+      const y = (window.innerHeight - e.pageY * pos) / 110;
       el.style.transform = `translateX(${x}px) translateY(${y}px)`;
     });
   }
@@ -74,12 +74,12 @@ main .sec1 .sec1_img
 /*
 main .sec2 #slider
  */
-// jQuery(document).ready(function ($) {
+// $(document).ready(function ($) {
 //   function initSlider() {
 //     var slideCount = $("#slider ul li").length;
 //     var slideWidth = $("#slider ul li").outerWidth();
 //     var sliderUlWidth = slideCount * slideWidth;
-//     $("#slider ul").css({ width: sliderUlWidth, marginLeft: -slideWidth });
+//     $("#slider ul").css({ width: sliderUlWidth, left: -slideWidth }); // Set initial position with left
 //     $("#slider ul li:last-child").prependTo("#slider ul");
 //   }
 //   initSlider();
@@ -91,7 +91,7 @@ main .sec2 #slider
 //       200,
 //       function () {
 //         $("#slider ul li:last-child").prependTo("#slider ul");
-//         $("#slider ul").css("left", "");
+//         $("#slider ul").css("left", -$("#slider ul li").outerWidth());
 //       }
 //     );
 //   }
@@ -103,7 +103,7 @@ main .sec2 #slider
 //       200,
 //       function () {
 //         $("#slider ul li:first-child").appendTo("#slider ul");
-//         $("#slider ul").css("left", "");
+//         $("#slider ul").css("left", -$("#slider ul li").outerWidth());
 //       }
 //     );
 //   }
@@ -111,27 +111,23 @@ main .sec2 #slider
 //     event.preventDefault();
 //     moveLeft();
 //   });
+
 //   $(".next_btn").click(function (event) {
 //     event.preventDefault();
 //     moveRight();
-//   });
-//   $(window).resize(function () {
-//     initSlider();
 //   });
 // });
 
 // -------------------------------------
 
-jQuery(document).ready(function ($) {
+$(document).ready(function ($) {
   function initSlider() {
     var slideCount = $("#slider ul li").length;
     var slideWidth = $("#slider ul li").outerWidth();
     var sliderUlWidth = slideCount * slideWidth;
-    $("#slider ul").css({ width: sliderUlWidth, left: -slideWidth }); // Set initial position with left
+    $("#slider ul").css({ width: sliderUlWidth, left: -slideWidth });
     $("#slider ul li:last-child").prependTo("#slider ul");
   }
-
-  initSlider();
 
   function moveLeft() {
     $("#slider ul").animate(
@@ -141,7 +137,7 @@ jQuery(document).ready(function ($) {
       200,
       function () {
         $("#slider ul li:last-child").prependTo("#slider ul");
-        $("#slider ul").css("left", -$("#slider ul li").outerWidth()); // Reset position after animation
+        $("#slider ul").css("left", -$("#slider ul li").outerWidth());
       }
     );
   }
@@ -154,26 +150,46 @@ jQuery(document).ready(function ($) {
       200,
       function () {
         $("#slider ul li:first-child").appendTo("#slider ul");
-        $("#slider ul").css("left", -$("#slider ul li").outerWidth()); // Reset position after animation
+        $("#slider ul").css("left", -$("#slider ul li").outerWidth());
       }
     );
   }
 
-  // Attach event listeners only to button clicks
-  $(".prev_btn").click(function (event) {
-    event.preventDefault();
-    moveLeft();
-  });
+  // 슬라이더 초기화 함수
+  function setupSlider() {
+    if (window.innerWidth < 1024) {
+      initSlider();
 
-  $(".next_btn").click(function (event) {
-    event.preventDefault();
-    moveRight();
-  });
+      // 버튼 클릭 이벤트 연결
+      $(".prev_btn")
+        .off("click")
+        .on("click", function (event) {
+          event.preventDefault();
+          moveLeft();
+        });
 
-  // Removed the resize event listener to prevent unintended slider movement
+      $(".next_btn")
+        .off("click")
+        .on("click", function (event) {
+          event.preventDefault();
+          moveRight();
+        });
+    } else {
+      // 1024px 이상에서는 슬라이더 초기화 해제
+      $("#slider ul").css({ left: 0 }); // 위치 초기화
+      $(".prev_btn").off("click"); // 이벤트 해제
+      $(".next_btn").off("click");
+    }
+  }
+
+  // 초기 슬라이더 설정
+  setupSlider();
+
+  // 화면 크기 변경 시 슬라이더 설정 업데이트
+  $(window).resize(function () {
+    setupSlider();
+  });
 });
-
-
 
 /*
 main .sec3 .mockup
@@ -226,7 +242,7 @@ ScrollTrigger.create({
   onEnter: () => {
     pcM2.addEventListener("mouseenter", () => aniUp(pcM2, pcS2));
     pcM2.addEventListener("mouseleave", () => aniDown(pcS2));
-    gsap.fromTo(left2, { xPercent: -100 }, { xPercent: 0, duration: 1 });
+    gsap.fromTo(left2, { xPercent: 100 }, { xPercent: 0, duration: 1 });
   },
 });
 
@@ -267,7 +283,7 @@ ScrollTrigger.create({
   end: "bottom top",
   scrub: 0.5,
   onEnter: () => {
-    gsap.fromTo(left4, { xPercent: -100 }, { xPercent: 0, duration: 1 });
+    gsap.fromTo(left4, { xPercent: 100 }, { xPercent: 0, duration: 1 });
   },
 });
 
