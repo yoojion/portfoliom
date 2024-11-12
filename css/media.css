@@ -253,7 +253,7 @@
   main .sec4
   */
   .sec4 {
-    padding: 100px 40px 100px;
+    padding: 100px 40px 0px;
     max-width: 1260px;
     margin: auto;
     display: flex;
@@ -281,7 +281,7 @@
   main .sec5
   */
   .sec5 {
-    padding: 0px 40px 100px;
+    padding: 100px 40px 100px;
     max-width: 1260px;
     margin: auto;
   }
