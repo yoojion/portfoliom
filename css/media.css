@@ -353,6 +353,7 @@
     width: 65%;
     gap: 20px;
     padding: 0px;
+    margin: 0;
   }
   .circular-pbar {
     width: 120px;
