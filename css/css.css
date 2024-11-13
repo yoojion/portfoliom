@@ -269,6 +269,7 @@ main .sec2 #about
 .sec2 #slider ul {
   position: relative;
   width: calc(100vw * 3);
+  border-radius: 15px;
 }
 .sec2 #slider ul li {
   position: relative;
@@ -277,7 +278,6 @@ main .sec2 #about
   float: left;
   width: 100vw;
   height: 365px;
-  border-radius: 15px;
   background: linear-gradient(#fbf0f1 0, #f7ecff 100%);
 }
 .sec2 #slider .next_btn,

@@ -23,7 +23,7 @@
   .sec4 .sec4_contents_wrap {
     gap: 30px 50px;
   }
-  
+
   /* 
   main .sec5
   */
@@ -195,7 +195,6 @@
   .sec2 #slider ul li {
     width: calc(100% / 3);
     height: auto;
-    border-radius: 0px;
     border-right: 1px solid #dfdfdf7d;
     padding-bottom: 40px;
   }
