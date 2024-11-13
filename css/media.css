@@ -1,6 +1,36 @@
 /* ====================================
 =============== tablet ================     
 ==================================== */
+@media (min-width: 768px) {
+  /* 
+  main
+  */
+  main::after {
+    height: 765px;
+  }
+  /* 
+  main .sec3
+  */
+  .sec3 .sec3_contents .contents_left_wrap .contents_left .mockup .mask {
+    top: 45px;
+  }
+  /* 
+  main .sec4
+  */
+  .sec4 .sec4_contents_wrap {
+    gap: 30px 50px;
+  }
+  /* 
+  main .sec5
+  */
+  .sec5 .tabs .tab_btn {
+    max-width: 550px;
+    margin: auto;
+  }
+}
+/* ====================================
+================ pc-s =================     
+==================================== */
 @media (min-width: 1024px) {
   /*
   all
@@ -111,7 +141,7 @@
     height: 90px;
   }
   .sec1 .sec1_img .p1 {
-    top: 65%;
+    top: 166%;
     left: -16%;
   }
   .sec1 .sec1_img .p2 {
@@ -180,19 +210,19 @@
     padding-left: 35px;
   }
   .sec2 #slider ul li .li_wrap.l1 .aboutme_b .aboutme_b1.b1 {
-    top: 102px;
+    top: 166px;
     right: -13px;
   }
   .sec2 #slider ul li .li_wrap.l1 .aboutme_b .aboutme_b1.b2 {
-    top: 262px;
+    top: 272px;
     left: -15px;
   }
   .sec2 #slider ul li .li_wrap.l1 .aboutme_b .aboutme_b1.b3 {
-    top: 300px;
-    left: 165px;
+    top: 323px;
+    left: 107px;
   }
   .sec2 #slider ul li .li_wrap.l1 .aboutme_b .aboutme_b1.b4 {
-    top: 226px;
+    top: 255px;
     right: 30px;
   }
   .sec2 #slider ul li .li_wrap.l1 .aboutme_b .aboutme_b1.b5 {
@@ -353,9 +383,23 @@
 }
 
 /* ====================================
-================= pc ==================     
+================ pc-m =================      
 ==================================== */
 @media (min-width: 1440px) {
+  /* 
+  main .sec2
+  */
+  .sec2 #slider ul li .li_wrap.l1 .aboutme_b .aboutme_b1.b1 {
+    top: 102px;
+  }
+  .sec2 #slider ul li .li_wrap.l1 .aboutme_b .aboutme_b1.b3 {
+    top: 300px;
+    left: 165px;
+  }
+  .sec2 #slider ul li .li_wrap.l1 .aboutme_b .aboutme_b1.b4 {
+    top: 226px;
+  }
+
   /* 
   main .sec3
   */
