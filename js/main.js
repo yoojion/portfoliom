@@ -251,85 +251,168 @@ main .sec2 #slider
 // });
 
 // -------------------------------------
+
+// $(document).ready(function ($) {
+//   let isAnimating = false; // 애니메이션 상태 플래그 추가
+
+//   // 슬라이더 초기화 함수
+//   function initSlider() {
+//     var slideCount = $("#slider ul li").length;
+//     var slideWidth = $("#slider ul li").outerWidth();
+//     var sliderUlWidth = slideCount * slideWidth;
+//     $("#slider ul").css({ width: sliderUlWidth, left: -slideWidth }); // Set initial position with left
+//     $("#slider ul li:last-child").prependTo("#slider ul");
+//   }
+
+//   // 왼쪽으로 슬라이드 이동
+//   function moveLeft() {
+//     if (!isAnimating) {
+//       isAnimating = true;
+//       $("#slider ul").animate(
+//         {
+//           left: +$("#slider ul li").outerWidth(),
+//         },
+//         200,
+//         function () {
+//           $("#slider ul li:last-child").prependTo("#slider ul");
+//           $("#slider ul").css("left", -$("#slider ul li").outerWidth());
+//           isAnimating = false; // 애니메이션 완료 후 플래그 해제
+//         }
+//       );
+//     }
+//   }
+
+//   // 오른쪽으로 슬라이드 이동
+//   function moveRight() {
+//     if (!isAnimating) {
+//       isAnimating = true;
+//       $("#slider ul").animate(
+//         {
+//           left: -$("#slider ul li").outerWidth(),
+//         },
+//         200,
+//         function () {
+//           $("#slider ul li:first-child").appendTo("#slider ul");
+//           $("#slider ul").css("left", -$("#slider ul li").outerWidth());
+//           isAnimating = false; // 애니메이션 완료 후 플래그 해제
+//         }
+//       );
+//     }
+//   }
+
+//   // 슬라이더 초기화 및 버튼 이벤트 설정
+//   function setupSlider() {
+//     if (window.innerWidth < 1024) {
+//       initSlider();
+
+//       $(".prev_btn").off("click").on("click", function (event) {
+//         event.preventDefault();
+//         moveLeft();
+//       });
+
+//       $(".next_btn").off("click").on("click", function (event) {
+//         event.preventDefault();
+//         moveRight();
+//       });
+//     } else {
+//       $(".prev_btn, .next_btn").off("click");
+//       $("#slider ul").css("left", 0);
+//     }
+//   }
+
+//   // 페이지 로딩 시 및 화면 크기 조정 시 슬라이더 설정
+//   setupSlider();
+
+//   // 리사이즈 이벤트에 디바운스를 적용하여 불필요한 호출 방지
+//   let resizeTimeout;
+//   $(window).resize(function () {
+//     clearTimeout(resizeTimeout);
+//     resizeTimeout = setTimeout(setupSlider, 200);
+//   });
+// });
+
+// -------------------------------------
 $(document).ready(function ($) {
-  let isAnimating = false; // 애니메이션 상태 플래그 추가
+  let sliderEnabled = false; // 슬라이더 활성화 상태 플래그
 
   // 슬라이더 초기화 함수
   function initSlider() {
     var slideCount = $("#slider ul li").length;
     var slideWidth = $("#slider ul li").outerWidth();
     var sliderUlWidth = slideCount * slideWidth;
-    $("#slider ul").css({ width: sliderUlWidth, left: -slideWidth }); // Set initial position with left
+    $("#slider ul").css({ width: sliderUlWidth, left: -slideWidth });
     $("#slider ul li:last-child").prependTo("#slider ul");
   }
 
   // 왼쪽으로 슬라이드 이동
   function moveLeft() {
-    if (!isAnimating) {
-      isAnimating = true;
-      $("#slider ul").animate(
-        {
-          left: +$("#slider ul li").outerWidth(),
-        },
-        200,
-        function () {
-          $("#slider ul li:last-child").prependTo("#slider ul");
-          $("#slider ul").css("left", -$("#slider ul li").outerWidth());
-          isAnimating = false; // 애니메이션 완료 후 플래그 해제
-        }
-      );
-    }
+    $("#slider ul").animate(
+      {
+        left: +$("#slider ul li").outerWidth(),
+      },
+      200,
+      function () {
+        $("#slider ul li:last-child").prependTo("#slider ul");
+        $("#slider ul").css("left", -$("#slider ul li").outerWidth());
+      }
+    );
   }
 
   // 오른쪽으로 슬라이드 이동
   function moveRight() {
-    if (!isAnimating) {
-      isAnimating = true;
-      $("#slider ul").animate(
-        {
-          left: -$("#slider ul li").outerWidth(),
-        },
-        200,
-        function () {
-          $("#slider ul li:first-child").appendTo("#slider ul");
-          $("#slider ul").css("left", -$("#slider ul li").outerWidth());
-          isAnimating = false; // 애니메이션 완료 후 플래그 해제
-        }
-      );
-    }
+    $("#slider ul").animate(
+      {
+        left: -$("#slider ul li").outerWidth(),
+      },
+      200,
+      function () {
+        $("#slider ul li:first-child").appendTo("#slider ul");
+        $("#slider ul").css("left", -$("#slider ul li").outerWidth());
+      }
+    );
   }
 
-  // 슬라이더 초기화 및 버튼 이벤트 설정
-  function setupSlider() {
-    if (window.innerWidth < 1024) {
+  // 슬라이더 활성화 설정 함수
+  function enableSlider() {
+    if (!sliderEnabled) {
       initSlider();
-
-      $(".prev_btn").off("click").on("click", function (event) {
+      $(".prev_btn").on("click", function (event) {
         event.preventDefault();
         moveLeft();
       });
-
-      $(".next_btn").off("click").on("click", function (event) {
+      $(".next_btn").on("click", function (event) {
         event.preventDefault();
         moveRight();
       });
+      sliderEnabled = true;
+    }
+  }
+
+  // 슬라이더 비활성화 설정 함수
+  function disableSlider() {
+    if (sliderEnabled) {
+      $(".prev_btn").off("click");
+      $(".next_btn").off("click");
+      $("#slider ul").css("left", 0); // 위치 초기화
+      sliderEnabled = false;
+    }
+  }
+
+  // 화면 크기에 따라 슬라이더 활성화/비활성화 설정
+  function setupSlider() {
+    if (window.innerWidth < 1024) {
+      enableSlider();
     } else {
-      $(".prev_btn, .next_btn").off("click");
-      $("#slider ul").css("left", 0);
+      disableSlider();
     }
   }
 
   // 페이지 로딩 시 및 화면 크기 조정 시 슬라이더 설정
   setupSlider();
-
-  // 리사이즈 이벤트에 디바운스를 적용하여 불필요한 호출 방지
-  let resizeTimeout;
   $(window).resize(function () {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(setupSlider, 200);
+    setupSlider();
   });
 });
-
 
 
 /*
