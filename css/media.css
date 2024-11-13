@@ -396,11 +396,10 @@
     height: 45px;
   }
 }
-
 /* ====================================
-================ pc-m =================      
+================ pc-m =================     
 ==================================== */
-@media (min-width: 1440px) {
+@media (min-width: 1126px) {
   /* 
   main .sec2
   */
@@ -418,6 +417,44 @@
   /* 
   main .sec3
   */
+  .sec3 .sec3_contents .contents_left_wrap .contents_left .mockup .mask {
+    top: 38px;
+  }
+
+  /* 
+  main .sec4
+  */
+  .sec4 .sec4_contents_wrap {
+    width: 60%;
+    gap: 30px;
+  }
+  .circular-pbar {
+    width: 130px;
+    height: 130px;
+  }
+
+  /* 
+  main .sec5
+  */
+  .sec5 .tabs .imgs {
+    width: 53%;
+    height: 330px;
+  }
+  .sec5 .tabs .imgs .space_img {
+    height: 330px;
+  }
+  .sec5 .tabs .tab_btn {
+    width: 42%;
+  }
+}
+
+/* ====================================
+================ pc-l =================      
+==================================== */
+@media (min-width: 1440px) {
+  /* 
+  main .sec3
+  */
   .sec3 .sec3_contents {
     gap: 50px;
   }
@@ -431,10 +468,6 @@
   .sec4 .sec4_contents_wrap {
     width: 57%;
     gap: 40px;
-  }
-  .circular-pbar {
-    width: 130px;
-    height: 130px;
   }
 
   /* 
