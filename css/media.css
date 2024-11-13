@@ -8,18 +8,22 @@
   main::after {
     height: 765px;
   }
+
   /* 
   main .sec3
   */
+
   .sec3 .sec3_contents .contents_left_wrap .contents_left .mockup .mask {
     top: 45px;
   }
+
   /* 
   main .sec4
   */
   .sec4 .sec4_contents_wrap {
     gap: 30px 50px;
   }
+  
   /* 
   main .sec5
   */
@@ -28,6 +32,7 @@
     margin: auto;
   }
 }
+
 /* ====================================
 ================ pc-s =================     
 ==================================== */
