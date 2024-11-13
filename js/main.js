@@ -51,80 +51,6 @@ main .sec1 .sec1_img
 /*
 main .sec2 #slider
 */
-// $(document).ready(function ($) {
-//   let sliderEnabled = false;
-
-//   function initSlider() {
-//     var slideCount = $("#slider ul li").length;
-//     var slideWidth = $("#slider ul li").outerWidth();
-//     var sliderUlWidth = slideCount * slideWidth;
-//     $("#slider ul").css({ width: sliderUlWidth, left: -slideWidth });
-//     $("#slider ul li:last-child").prependTo("#slider ul");
-//   }
-
-//   function moveLeft() {
-//     $("#slider ul").animate(
-//       {
-//         left: +$("#slider ul li").outerWidth(),
-//       },
-//       200,
-//       function () {
-//         $("#slider ul li:last-child").prependTo("#slider ul");
-//         $("#slider ul").css("left", -$("#slider ul li").outerWidth());
-//       }
-//     );
-//   }
-
-//   function moveRight() {
-//     $("#slider ul").animate(
-//       {
-//         left: -$("#slider ul li").outerWidth(),
-//       },
-//       200,
-//       function () {
-//         $("#slider ul li:first-child").appendTo("#slider ul");
-//         $("#slider ul").css("left", -$("#slider ul li").outerWidth());
-//       }
-//     );
-//   }
-
-//   function enableSlider() {
-//     if (!sliderEnabled) {
-//       initSlider();
-//       $(".prev_btn").on("click", function (event) {
-//         event.preventDefault();
-//         moveLeft();
-//       });
-//       $(".next_btn").on("click", function (event) {
-//         event.preventDefault();
-//         moveRight();
-//       });
-//       sliderEnabled = true;
-//     }
-//   }
-//   function disableSlider() {
-//     if (sliderEnabled) {
-//       $(".prev_btn").off("click");
-//       $(".next_btn").off("click");
-//       $("#slider ul").css("left", 0);
-//       sliderEnabled = false;
-//     }
-//   }
-
-//   function setupSlider() {
-//     if (window.innerWidth < 1024) {
-//       enableSlider();
-//     } else {
-//       disableSlider();
-//     }
-//   }
-
-//   setupSlider();
-//   $(window).resize(function () {
-//     setupSlider();
-//   });
-// });
-// -------------------------------------
 $(document).ready(function ($) {
   let sliderEnabled = false;
 
@@ -138,26 +64,21 @@ $(document).ready(function ($) {
 
   function moveLeft() {
     const slideWidth = $("#slider ul li").outerWidth();
-    $("#slider ul").animate(
-      { left: 0 }, // 현재 위치로 부드럽게 이동
-      200,
-      "swing", // 부드러운 애니메이션 효과
-      function () {
-        $("#slider ul li:last-child").prependTo("#slider ul");
-        $("#slider ul").css("left", -slideWidth); // 위치 리셋
-      }
-    );
+    $("#slider ul").animate({ left: 0 }, 200, "swing", function () {
+      $("#slider ul li:last-child").prependTo("#slider ul");
+      $("#slider ul").css("left", -slideWidth);
+    });
   }
 
   function moveRight() {
     const slideWidth = $("#slider ul li").outerWidth();
     $("#slider ul").animate(
-      { left: -2 * slideWidth }, // 슬라이드가 두 배 이동하도록
+      { left: -2 * slideWidth },
       200,
-      "swing", // 부드러운 애니메이션 효과
+      "swing",
       function () {
         $("#slider ul li:first-child").appendTo("#slider ul");
-        $("#slider ul").css("left", -slideWidth); // 위치 리셋
+        $("#slider ul").css("left", -slideWidth);
       }
     );
   }
@@ -199,7 +120,6 @@ $(document).ready(function ($) {
     setupSlider();
   });
 });
-
 
 /*
 main .sec3 .mockup
