@@ -45,6 +45,44 @@
 }
 
 /* ====================================
+============== tablet-l ===============     
+==================================== */
+
+@media (min-width: 790px) {
+  /* 
+  main .sec3
+  */
+  .sec3 .sec3_contents .contents_left_wrap .contents_left .mockup .mask {
+    top: 48px;
+  }
+  /* 
+  main .sec4
+  */
+  .sec4 .sec4_contents_wrap {
+    gap: 30px 60px;
+  }
+}
+/* ====================================
+============== tablet-xl ===============     
+==================================== */
+
+@media (min-width: 830px) {
+  /* 
+  main .sec3
+  */
+  .sec3 .sec3_contents .contents_left_wrap .contents_left .mockup .mask {
+    top: 50px;
+  }
+  /* 
+  main .sec4
+  */
+  .sec4 .sec4_contents_wrap {
+    max-width: 790px;
+    margin: auto;
+  }
+}
+
+/* ====================================
 ================ pc-s =================     
 ==================================== */
 @media (min-width: 1024px) {
@@ -437,11 +475,7 @@
   main .sec5
   */
   .sec5 .tabs .imgs {
-    width: 53%;
-    height: 330px;
-  }
-  .sec5 .tabs .imgs .space_img {
-    height: 330px;
+    width: 55%;
   }
   .sec5 .tabs .tab_btn {
     width: 42%;
