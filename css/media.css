@@ -1,5 +1,5 @@
 /* ====================================
-================= pc ==================     
+=============== tablet ================     
 ==================================== */
 @media (min-width: 1024px) {
   /*
@@ -218,9 +218,12 @@
   .sec3 .sec3_contents {
     flex-direction: row;
     max-width: 1260px;
-    margin: 100px auto 0px;
+    margin: 150px auto 0px;
     justify-content: space-between;
-    gap: 50px;
+    gap: 25px;
+  }
+  .sec3 .sec3_contents1 {
+    margin-top: 100px;
   }
   .sec3 .sec3_contents.sec3_contents2,
   .sec3 .sec3_contents.sec3_contents4 {
@@ -246,7 +249,7 @@
     height: 500px;
   }
   .sec3 .sec3_contents .contents_left_wrap .contents_left .mockup .mask {
-    top: 42px;
+    top: 34px;
   }
 
   /* 
@@ -264,13 +267,13 @@
   }
   .sec4 .sec4_contents_wrap {
     justify-content: space-between;
-    width: 57%;
-    gap: 40px;
+    width: 65%;
+    gap: 20px;
     padding: 0px;
   }
   .circular-pbar {
-    width: 130px;
-    height: 130px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     position: relative;
     --p: 0;
@@ -281,13 +284,13 @@
   main .sec5
   */
   .sec5 {
-    padding: 0px 40px 100px;
+    padding: 100px 40px 100px;
     max-width: 1260px;
     margin: auto;
   }
   .sec5 .secname {
     padding: 0px;
-    margin-top: 100px;
+    margin-top: 0px;
   }
   .sec5 .tabs {
     padding: 0px;
@@ -295,15 +298,15 @@
     position: relative;
   }
   .sec5 .tabs .imgs {
-    width: 60%;
-    height: 350px;
+    width: 50%;
+    height: 300px;
     margin-top: 50px;
   }
   .sec5 .tabs .imgs .space_img {
-    height: 350px;
+    height: 300px;
   }
   .sec5 .tabs .tab_btn {
-    width: 36%;
+    width: 45%;
     position: absolute;
     margin-top: 50px;
     justify-content: space-between;
@@ -346,5 +349,46 @@
     right: 5%;
     width: 45px;
     height: 45px;
+  }
+}
+
+/* ====================================
+================= pc ==================     
+==================================== */
+@media (min-width: 1440px) {
+  /* 
+  main .sec3
+  */
+  .sec3 .sec3_contents {
+    gap: 50px;
+  }
+  .sec3 .sec3_contents .contents_left_wrap .contents_left .mockup .mask {
+    top: 42px;
+  }
+
+  /* 
+  main .sec4
+  */
+  .sec4 .sec4_contents_wrap {
+    width: 57%;
+    gap: 40px;
+  }
+  .circular-pbar {
+    width: 130px;
+    height: 130px;
+  }
+
+  /* 
+  main .sec5
+  */
+  .sec5 .tabs .imgs {
+    width: 60%;
+    height: 350px;
+  }
+  .sec5 .tabs .imgs .space_img {
+    height: 350px;
+  }
+  .sec5 .tabs .tab_btn {
+    width: 36%;
   }
 }

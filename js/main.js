@@ -154,7 +154,15 @@ $(document).ready(function ($) {
       }
     );
   }
+  $(".prev_btn").click(function (event) {
+    event.preventDefault();
+    moveLeft();
+  });
 
+  $(".next_btn").click(function (event) {
+    event.preventDefault();
+    moveRight();
+  });
   // 슬라이더 초기화 함수
   function setupSlider() {
     if (window.innerWidth < 1024) {
