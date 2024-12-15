@@ -33,6 +33,7 @@ $(document).ready(function () {
   });
 });
 
+
 /*
 main .sec1 .sec1_img
  */
@@ -47,6 +48,7 @@ main .sec1 .sec1_img
     });
   }
 })();
+
 
 /*
 main .sec2 #slider
@@ -120,6 +122,7 @@ $(document).ready(function ($) {
     setupSlider();
   });
 });
+
 
 /*
 main .sec3 .mockup
@@ -217,6 +220,7 @@ ScrollTrigger.create({
   },
 });
 
+
 /*
 main .sec4 #skill-bar
 */
@@ -247,6 +251,31 @@ circles.forEach((el) => {
     0
   );
 });
+
+
+/*
+main .sec5 imgs
+*/
+document.addEventListener("DOMContentLoaded", () => {
+  const imageLinks = {
+    one: "ad.html",
+    two: "ad.html",
+    three: "ad.html",
+    four: "ad.html",
+    five: "ad.html",
+    six: "ad.html",
+  };
+
+  Object.keys(imageLinks).forEach((key) => {
+    const imageElement = document.querySelector(`.space_img.${key}`);
+    if (imageElement) {
+      imageElement.addEventListener("click", () => {
+        window.open(imageLinks[key], "_blank");
+      });
+    }
+  });
+});
+
 
 /*
 arrow_up
